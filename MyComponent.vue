@@ -38,7 +38,7 @@
             createImage(file) {
                 let reader = new FileReader()               
                 reader.onload = (e) => {
-                    this.sorteo.image = e.target.result
+                    this.my_model.image = e.target.result
                 };
                 reader.readAsDataURL(file)               
             },
