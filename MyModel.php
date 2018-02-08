@@ -2,11 +2,11 @@
 
 namespace App\Core\Contracts;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Storage;
 
-class MyModel extends Eloquent
+class MyModel extends Model
 {
   protected $collection = 'my-table';
 
@@ -14,7 +14,7 @@ class MyModel extends Eloquent
 
   public function setImageAttribute($img){
     $split = explode(',', $img);
-    $image = base64_decode($parts[1]);
+    $image = base64_decode($split[1]);
     $this->attributes['image'] = $this->createFileName($this->getExtension($split[0]));
     Storage::disk('my-images')->put($filename, $image); /* <-- FileSystem */
   }
