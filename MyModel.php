@@ -12,10 +12,11 @@ class MyModel extends Model
 
   protected $fillable = ['title', 'image'];
 
-  public function setImageAttribute($img){
+  public function setImageAttribute($img){	  
     $split = explode(',', $img);
     $image = base64_decode($split[1]);
-    $this->attributes['image'] = $this->createFileName($this->getExtension($split[0]));
+	$filename = $this->createFileName($this->getExtension($split[0]));
+    $this->attributes['image'] = $filename;
     Storage::disk('my-images')->put($filename, $image); /* <-- FileSystem */
   }
 
